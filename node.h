@@ -1,34 +1,35 @@
 #ifndef NODE_H
 #define NODE_H
 
-enum Op {addition,subtraction,multiplication,division,none};
+enum class Op:char {addition='+',subtraction='-',multiplication='*',division='/',none='N'};
 
 
 enum expEnum {anExpression,aVariable,aNumber,aNothing};
 
-union expression {
-	Node* exp;
-	long long number;
-}
 
 class Node {
 	Op operation;
 	expEnum leftType;
-	expression left;
+  Node* left;
+  int leftConstant;
 	expEnum rightType;
-	expression right;
+	Node* right;
+  int rightConstant;
 
     public:
-        Node(): 
-		operation(none),
-		leftType(aNothing),left(-1),
-		rightType(aNothing),right(-1){}
-	Node(Node n){
-		operation = node.operation;
-		leftType = node.leftType;
-		left = node.left;
-		rightType = node.rightType;
-		right = node.right;
+  Node(): 
+		operation(Op::none),
+		leftType(aNothing),left(0),leftConstant(-1),
+		rightType(aNothing),right(0),rightConstant(-1){}
+
+	Node(const Node& n){
+		operation = n.operation;
+		leftType = n.leftType;
+		left = n.left;
+    leftConstant = n.leftConstant;
+		rightType = n.rightType;
+		right = n.right;
+    rightConstant = n.rightConstant;
 	}
 
 	static Op getOpForChar(char opChar);
@@ -36,18 +37,21 @@ class Node {
 	void setOp(Op newOp);
 	bool setOp(char newOpChar);
 	void setLeftVariable();
-	void setLeftConstant(long long n);
+	void setLeftConstant(int n);
 	void setLeftExpression(Node* expression);
 	void setRightVariable();
-	void setRightConstant(long long n);
+	void setRightConstant(int n);
 	void setRightExpression(Node* expression);
 
 	Op getOp();
 	char getOpChar();
 	expEnum getLeftType();
 	expEnum getRightType();
-	expression getLeft();
-	expression getRight();
+  
+  int getLeftConstant();
+  Node* getLeftExpression();
+  int getRightConstant();
+  Node* getRightExpression();
 }
 
 #endif //NODE_H

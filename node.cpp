@@ -1,28 +1,34 @@
 #include "node.h"
 
-static Op Node::getOpForChar(char opChar){
+;Op Node::getOpForChar(char opChar){
 	switch(opChar){
-		case '+': return addition;
-		case '-': return subtraction;
-		case '*': return multiplication;
-		case '/': return division;
+    case '+': return Op::addition;
+    case '-': return Op::subtraction;
+    case '*': return Op::multiplication;
+    case '/': return Op::division;
 	}
-	return none;
+	return Op::none;
 }
 
 void Node::setOp(Op newOp){
-	//Implementation here
+  operation = newOp;
 }
 
 bool Node::setOp(char newOpChar){
-	//Implementation here
+	Op newOp = getOpForChar(newOpChar);
+  if(newOp!=Op::none){
+    operation=newOp;
+    return true;
+  }else{
+    return false;
+  }
 }
 
 void Node::setLeftVariable(){
-	//Implementation here
+  leftType = aVariable;
 }
 
-void Node::setLeftConstant(long long n){
+void Node::setLeftConstant(int n){
 	//Implementation here
 }
 
@@ -34,7 +40,7 @@ void Node::setRightVariable(){
 	//Implementation here
 }
 
-void Node::setRightConstant(long long n){
+void Node::setRightConstant(int n){
 	//Implementation here
 }
 
@@ -58,6 +64,6 @@ expEnum Node::getLeftType(){
 	//Implementation here
 }
 
-expEnum Node::getLeftType(){
+expEnum Node::getRightType(){
 	//Implementation here
 }
