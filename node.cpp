@@ -1,6 +1,6 @@
 #include "node.h"
 
-;Op Node::getOpForChar(char opChar){
+Op Node::getOpForChar(char opChar){
 	switch(opChar){
     case '+': return Op::addition;
     case '-': return Op::subtraction;
@@ -16,36 +16,42 @@ void Node::setOp(Op newOp){
 
 bool Node::setOp(char newOpChar){
 	Op newOp = getOpForChar(newOpChar);
-  if(newOp!=Op::none){
-    operation=newOp;
-    return true;
-  }else{
-    return false;
-  }
+    if(newOp!=Op::none){
+        operation=newOp;
+        return true;
+    }else{
+        return false;
+    }
 }
 
 void Node::setLeftVariable(){
-  leftType = aVariable;
+    leftType = aVariable;
 }
 
 void Node::setLeftConstant(int n){
-	//Implementation here
+    leftType = aConstant;
+    leftConstant = n;
 }
 
 void Node::setLeftExpression(Node* expression){
-	//Implementation here
+    leftType = anExpression;
+    if(left!=0) delete left;
+    left = expression;
 }
 
 void Node::setRightVariable(){
-	//Implementation here
+    rightType = aVariable;
 }
 
 void Node::setRightConstant(int n){
-	//Implementation here
+    rightType = aConstant;
+    rightConstant = n;
 }
 
 void Node::setRightExpression(Node* expression){
-	//Implementation here
+    rightType = anExpression;
+    if(right!=0) delete right;
+    right = expression;
 }
 
 
@@ -53,7 +59,7 @@ void Node::setRightExpression(Node* expression){
 
 
 Op Node::getOp(){
-	//Implementation here
+    //Implementation here
 }
 
 char Node::getOpChar(){
