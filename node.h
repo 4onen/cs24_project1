@@ -18,6 +18,7 @@ enum expEnum
 
 
 class Node {
+    Node* parent;
 	Op operation;
 	expEnum leftType;
     Node* left;
@@ -26,34 +27,17 @@ class Node {
 	Node* right;
     int rightConstant;
 
-    public:
+  public:
     Node(): 
         operation(Op::none),
         leftType(aNothing),left(0),leftConstant(-1),
         rightType(aNothing),right(0),rightConstant(-1){}
 
-    Node(const Node& n){
-        operation = n.operation;
-        switch(leftType=n.leftType){
-            case aConstant:
-                leftConstant=n.leftConstant;
-                break;
-            case anExpression:
-                left = new Node(*n.left);
-                break;
-        }
-        switch(rightType=n.rightType){
-            case aConstant:
-                rightConstant=n.rightConstant;
-                break;
-            case anExpression:
-                right = new Node(*n.right);
-                break;
-        }
-	}
+    Node(const Node& n, bool copyParent=false, Node* newParent=0);
 
 	static Op getOpForChar(char opChar);
-
+    
+    void setParent(Node* newParent);
 	void setOp(Op newOp);
 	bool setOp(char newOpChar);
 	void setLeftVariable();
@@ -63,6 +47,7 @@ class Node {
 	void setRightConstant(int n);
 	void setRightExpression(Node* expression);
 
+    Node* getParent();
 	Op getOp();
 	char getOpChar();
     expEnum getLeftType();
