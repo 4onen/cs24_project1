@@ -5,13 +5,13 @@
 
 class Expression{
     public:
-        Expression(string pInfix);
+        Expression(std::string pInfix);
         Expression(const Expression &source);
-        string infixString() const;
-        string prefixString() const;
-        string postfixString() const;
+        std::string infixString() const;
+        std::string prefixString() const;
+        std::string postfixString() const;
     private:
         Node* tree;
-}
+};
 
 #endif //EXPRESSION_H

@@ -1,21 +1,21 @@
 #include "expression.h"
 
-Expression::Expression(string pInfix){
+Expression::Expression(std::string pInfix){
     tree = parenInfixToAST(pInfix);
 }
 
 Expression::Expression(const Expression &source){
-    tree = new Node(source.tree);
+    tree = new Node(*source.tree);
 }
 
-string Expression::infixString() const{
+std::string Expression::infixString() const{
     return tree->toInfix();
 }
 
-string Expression::prefixString() const{
+std::string Expression::prefixString() const{
     return tree->toPrefix();
 }
 
-string Expression::postfixString() const{
+std::string Expression::postfixString() const{
     return tree->toPostfix();
 }
