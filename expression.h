@@ -6,7 +6,7 @@
 class Expression{
     public:
         Expression(string pInfix);
-        Expression(const expression &source);
+        Expression(const Expression &source);
         string infixString() const;
         string prefixString() const;
         string postfixString() const;
