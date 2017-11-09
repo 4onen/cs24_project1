@@ -3,10 +3,10 @@
 
 #include "list.h"
 
-class expression{
+class Expression{
     public:
-        expression(string pInfix);
-        expression(const expression &source);
+        Expression(string pInfix);
+        Expression(const expression &source);
         string infixString() const;
         string prefixString() const;
         string postfixString() const;
