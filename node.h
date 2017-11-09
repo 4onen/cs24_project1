@@ -1,55 +1,64 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <string>
+
 enum class Op:char
-    {addition='+'
-    ,subtraction='-'
-    ,multiplication='*'
-    ,division='/'
-    ,none='N'
+    { ADDITION='+'
+    , SUBTRACTION='-'
+    , MULTIPLICATION='*'
+    , DIVISION='/'
+    , NONE='N'
     };
 
 enum expEnum
-    {anExpression
-    ,aVariable
-    ,aConstant
-    ,aNothing
+    { anExpression
+    , aVariable
+    , aConstant
+    , aNothing
+    };
+
+enum fixEnum
+    { INFIX
+    , PREFIX
+    , POSTFIX
     };
 
 
 class Node {
     Node* parent;
-	Op operation;
-	expEnum leftType;
+    Op operation;
+    expEnum leftType;
     Node* left;
     int leftConstant;
-	expEnum rightType;
-	Node* right;
+    expEnum rightType;
+    Node* right;
     int rightConstant;
 
   public:
     Node(): 
-        operation(Op::none),
+        operation(Op::NONE),
         leftType(aNothing),left(0),leftConstant(-1),
         rightType(aNothing),right(0),rightConstant(-1){}
 
     Node(const Node& n, bool copyParent=false, Node* newParent=0);
 
-	static Op getOpForChar(char opChar);
+    static Op getOpForChar(char opChar);
     
+    //Mutators
     void setParent(Node* newParent);
-	void setOp(Op newOp);
-	bool setOp(char newOpChar);
-	void setLeftVariable();
-	void setLeftConstant(int n);
-	void setLeftExpression(Node* expression);
-	void setRightVariable();
-	void setRightConstant(int n);
-	void setRightExpression(Node* expression);
+    void setOp(Op newOp);
+    bool setOp(char newOpChar);
+    void setLeftVariable();
+    void setLeftConstant(int n);
+    void setLeftExpression(Node* expression);
+    void setRightVariable();
+    void setRightConstant(int n);
+    void setRightExpression(Node* expression);
 
+    //Direct fetch
     Node* getParent();
-	Op getOp();
-	char getOpChar();
+    Op getOp();
     expEnum getLeftType();
     expEnum getRightType();
   
@@ -58,6 +67,15 @@ class Node {
 
     int getRightConstant();
     Node* getRightExpression();
+
+    //Indirect fetch
+    char getOpChar() const;
+    std::string leftString(const fixEnum fixing=INFIX) const;
+    std::string rightString(const fixEnum fixing=INFIX) const;
+    std::string toString(const fixEnum fixing=INFIX) const;
+    std::string toInfix() const{ return toString(); }
+    std::string toPrefix() const{ return toString(PREFIX); }
+    std::string toPostfix() const{ return toString(POSTFIX); }
 };
 
 #endif //NODE_H

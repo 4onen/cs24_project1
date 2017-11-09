@@ -1,7 +1,8 @@
 #include "node.h"
 
 
-Node(const Node& n, bool copyParent=false, Node* newParent=0){
+//Copy constructor
+Node::Node(const Node &n, bool copyParent, Node* newParent){
     if(copyParent){
         parent = n.parent;
     }else{
@@ -16,6 +17,9 @@ Node(const Node& n, bool copyParent=false, Node* newParent=0){
         case anExpression:
             left = new Node(*n.left,false,this);
             break;
+        case aVariable: 
+        case aNothing:
+            break;
     }
     switch(rightType=n.rightType){
         case aConstant:
@@ -24,6 +28,9 @@ Node(const Node& n, bool copyParent=false, Node* newParent=0){
         case anExpression:
             right = new Node(*n.right,false,this);
             break;
+        case aVariable:
+        case aNothing:
+            break;
     }
 }
 
@@ -32,17 +39,18 @@ Node(const Node& n, bool copyParent=false, Node* newParent=0){
 
 
 
-
+//Static method
 Op Node::getOpForChar(char opChar){
 	switch(opChar){
-    case '+': return Op::addition;
-    case '-': return Op::subtraction;
-    case '*': return Op::multiplication;
-    case '/': return Op::division;
+    case '+': return Op::ADDITION;
+    case '-': return Op::SUBTRACTION;
+    case '*': return Op::MULTIPLICATION;
+    case '/': return Op::DIVISION;
 	}
-	return Op::none;
+	return Op::NONE;
 }
 
+//Mutators
 void Node::setParent(Node* newParent){
     parent = newParent;
 }
@@ -53,7 +61,7 @@ void Node::setOp(Op newOp){
 
 bool Node::setOp(char newOpChar){
 	Op newOp = getOpForChar(newOpChar);
-    if(newOp!=Op::none){
+    if(newOp!=Op::NONE){
         operation=newOp;
         return true;
     }else{
@@ -90,7 +98,7 @@ void Node::setRightExpression(Node* expression){
 }
 
 
-
+//Direct fetch
 Node* Node::getParent(){
     return parent;
 }
@@ -99,14 +107,70 @@ Op Node::getOp(){
     return operation;
 }
 
-char Node::getOpChar(){
-    return static_cast<char>(operation);
-}
-
 expEnum Node::getLeftType(){
     return leftType;
 }
 
 expEnum Node::getRightType(){
     return rightType;
+}
+
+//Indirect fetch
+char Node::getOpChar() const{
+    return static_cast<char>(operation);
+}
+
+std::string Node::leftString(fixEnum fixing) const{
+    switch(leftType){
+        case anExpression:
+            return left->toString(fixing);
+            break;
+        case aVariable:
+            return "x";
+            break;
+        case aConstant:
+            return std::to_string(leftConstant);
+            break;
+        case aNothing:
+            return "NaN";
+            break;
+    }
+}
+
+std::string Node::rightString(fixEnum fixing) const{
+    switch(rightType){
+        case anExpression:
+            return right->toString(fixing);
+            break;
+        case aVariable:
+            return "x";
+            break;
+        case aConstant:
+            return std::to_string(rightConstant);
+            break;
+        case aNothing:
+            return "NaN";
+            break;
+    }
+}
+    
+    
+
+std::string Node::toString(fixEnum fixing) const{
+    std::string leftString = this->leftString(fixing);
+
+    std::string rightString = this->rightString(fixing);
+
+    switch(fixing){
+        case INFIX:
+            return "("+leftString+std::string(1,getOpChar())+rightString+")";
+            break;
+        case PREFIX:
+            return std::string(1,getOpChar())+" "+leftString+" "+rightString+" ";
+            break;
+        case POSTFIX:
+            return leftString+" "+rightString+" "+std::string(1,getOpChar())+" ";
+            break;
+    }
+    return "IMPOSSIBLE_STATE";
 }
