@@ -4,7 +4,7 @@
 #include <string>
 #include "node.h"
 
-Node* parenInfixToAST(std::string pInfix);
+Node* parenInfixToAST(const std::string pInfix);
 
 
 #endif //LIST_H

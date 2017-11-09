@@ -1,6 +1,6 @@
 #include "list.h"
 
-Node* parenInfixToAST(std::string pInfix){
+Node* parenInfixToAST(const std::string pInfix){
     unsigned cursor = 0;
     Node* currentNode = new Node();
     Node* n;
@@ -8,7 +8,8 @@ Node* parenInfixToAST(std::string pInfix){
     for(cursor=0;cursor<pInfix.length();cursor++){
         switch(pInfix[cursor]){
             case '(':
-                new Node();
+                n = new Node();
+                n->setParent(currentNode);
                 if(currentNode->getLeftType()==aNothing)
                     currentNode->setLeftExpression(n);
                 else if(currentNode->getRightType()==aNothing)
@@ -47,7 +48,7 @@ Node* parenInfixToAST(std::string pInfix){
                 }
                 break;
             case ')':
-                currentNode=currentNode->parent;
+                currentNode=currentNode->getParent();
         }
     }
 }
