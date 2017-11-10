@@ -21,6 +21,19 @@ Node* parenInfixToAST(const std::string pInfix){
                 break;
             case '+': 
             case '-':
+                if(currentNode->getLeftType()==aNothing 
+                        || currentNode->getOp()!=Op::NONE){
+                    if(currentNode->getLeftType()==aNothing){
+                        currentNode->setLeftConstant(atoi(pInfix.c_str()+cursor));
+                    }else{
+                        currentNode->setRightConstant(atoi(pInfix.c_str()+cursor));
+                    }
+                    cursor++;
+                    while(pInfix[cursor]<='9'&&pInfix[cursor]>='0'){
+                        cursor++;
+                    }
+                    break;
+                }
             case '*':
             case '/':
                 currentNode->setOp(pInfix[cursor]);

@@ -135,6 +135,7 @@ std::string Node::leftString(fixEnum fixing) const{
             return "NaN";
             break;
     }
+    return "NaN";
 }
 
 std::string Node::rightString(fixEnum fixing) const{
@@ -152,6 +153,7 @@ std::string Node::rightString(fixEnum fixing) const{
             return "NaN";
             break;
     }
+    return "NaN";
 }
     
     
