@@ -9,13 +9,19 @@ Expression::Expression(const Expression &source){
 }
 
 std::string Expression::infixString() const{
-    return tree->toInfix();
+    if(tree != 0)
+        return tree->toInfix();
+    return "";
 }
 
 std::string Expression::prefixString() const{
-    return tree->toPrefix();
+    if(tree != 0)
+        return tree->toPrefix();
+    return "";
 }
 
 std::string Expression::postfixString() const{
-    return tree->toPostfix();
+    if(tree != 0)
+        return tree->toPostfix();
+    return "";
 }

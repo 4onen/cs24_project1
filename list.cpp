@@ -1,6 +1,9 @@
 #include "list.h"
 
 Node* parenInfixToAST(const std::string pInfix){
+    if(pInfix.length()<3) //Can't be real expression
+        return 0;
+
     unsigned cursor = 0;
     Node* currentNode = new Node();
     Node* n;
@@ -59,10 +62,14 @@ Node* parenInfixToAST(const std::string pInfix){
                 while(pInfix[cursor]<='9'&&pInfix[cursor]>='0'){
                     cursor++;
                 }
+                cursor--; //Undo last step before next loop cycle.
                 break;
             case ')':
                 currentNode=currentNode->getParent();
         }
     }
+
+    if(currentNode->getParent()!=0)//Mismatched Parentheses
+
 }
 
