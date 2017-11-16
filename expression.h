@@ -1,6 +1,8 @@
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 
+#include <string>
+
 #include "list.h"
 
 class Expression{

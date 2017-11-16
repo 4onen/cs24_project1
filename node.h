@@ -57,16 +57,16 @@ class Node {
     void setRightExpression(Node* expression);
 
     //Direct fetch
-    Node* getParent();
-    Op getOp();
-    expEnum getLeftType();
-    expEnum getRightType();
+    Node* getParent() const;
+    Op getOp() const;
+    expEnum getLeftType() const;
+    expEnum getRightType() const;
   
-    int getLeftConstant();
-    Node* getLeftExpression();
+    int getLeftConstant() const;
+    Node* getLeftExpression() const;
 
-    int getRightConstant();
-    Node* getRightExpression();
+    int getRightConstant() const;
+    Node* getRightExpression() const;
 
     //Indirect fetch
     char getOpChar() const;

@@ -99,20 +99,36 @@ void Node::setRightExpression(Node* expression){
 
 
 //Direct fetch
-Node* Node::getParent(){
+Node* Node::getParent() const{
     return parent;
 }
 
-Op Node::getOp(){
+Op Node::getOp() const{
     return operation;
 }
 
-expEnum Node::getLeftType(){
+expEnum Node::getLeftType() const{
     return leftType;
 }
 
-expEnum Node::getRightType(){
+expEnum Node::getRightType() const{
     return rightType;
+}
+
+int Node::getLeftConstant() const{
+    return leftConstant;
+}
+
+Node* Node::getLeftExpression() const{
+    return left;
+}
+
+int Node::getRightConstant() const{
+    return rightConstant;
+}
+
+Node* Node::getRightExpression() const{
+    return right;
 }
 
 //Indirect fetch

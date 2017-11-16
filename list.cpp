@@ -4,6 +4,9 @@ Node* parenInfixToAST(const std::string pInfix){
     if(pInfix.length()<3) //Can't be real expression
         return 0;
 
+    if(!properlyParenthesized(pInfix))
+        return 0;
+
     unsigned cursor = 0;
     Node* currentNode = new Node();
     Node* n;
@@ -70,6 +73,37 @@ Node* parenInfixToAST(const std::string pInfix){
     }
 
     if(currentNode->getParent()!=0)//Mismatched Parentheses
+        return 0;//Memory leak, but whatever.
 
+    if(currentNode->getLeftType()==anExpression 
+            && currentNode->getOp()==Op::NONE 
+            && currentNode->getRightType()==aNothing){//Over-parenthesization
+        n = currentNode->getLeftExpression();
+        delete currentNode;
+        return n;
+    }
+
+    return currentNode;
 }
 
+
+int parenCheck(const std::string pInfix){
+    int n = 0;
+
+    for(int cursor=0;cursor<pInfix.length(); cursor++){
+        if(n<0) return (-1)*(cursor+1);
+        switch(pInfix[cursor]){
+            case '(':
+                n++;
+                break;
+            case ')':
+                n--;
+                break;
+        }
+    }
+    return n;
+}
+
+bool properlyParenthesized(const std::string pInfix){
+    return parenCheck(pInfix)==0;
+}
