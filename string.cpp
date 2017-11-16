@@ -25,8 +25,8 @@ int main(int argc, char* argv[]){
         if(n>0){
             std::cout<<"Missing "<<n<<" ')'s at end of input."<<std::endl;
         }else if(n<0){
-            std::cout<<nSpaces(13-n)<<"^~"<<std::endl;
-            std::cout<<"Missing '(' before marked position."<<std::endl;
+            std::cout<<"             "<<nSpaces(-n-1)<<"^"<<std::endl;
+            std::cout<<"Missing '(' before marked ')'."<<std::endl;
         }else{
             std::cout<<"Unspecified internal error. Sorry!"<<std::endl;
         }
@@ -51,5 +51,5 @@ std::string argsToString(int argc, char* argv[]){
 }
 
 std::string nSpaces(int n){
-    
+    return std::string(n,'.');
 }

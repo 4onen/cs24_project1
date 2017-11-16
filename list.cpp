@@ -91,7 +91,7 @@ int parenCheck(const std::string pInfix){
     int n = 0;
 
     for(int cursor=0;cursor<pInfix.length(); cursor++){
-        if(n<0) return (-1)*(cursor+1);
+        if(n<0) return (-1)*(cursor);
         switch(pInfix[cursor]){
             case '(':
                 n++;
