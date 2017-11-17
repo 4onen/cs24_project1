@@ -1,3 +1,6 @@
+//List.cpp -- Implementation of tree-parsing and infix parenthesization checks
+//Matthew Dupree & Diego Rico, 16 November 2017
+
 #include "list.h"
 
 Node* parenInfixToAST(const std::string pInfix){

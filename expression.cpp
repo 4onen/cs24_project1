@@ -1,3 +1,6 @@
+//Expression.cpp -- Implementation of node encapsulation class
+//Matthew Dupree & Diego Rico, 16 November 2017
+
 #include "expression.h"
 
 Expression::Expression(std::string pInfix){

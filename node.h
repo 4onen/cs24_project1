@@ -1,3 +1,7 @@
+//Node.h -- Core data representation class
+//Matthew Dupree & Diego Rico, 16 November 2017
+
+
 #ifndef NODE_H
 #define NODE_H
 

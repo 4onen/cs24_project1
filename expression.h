@@ -1,3 +1,7 @@
+//Expression.h -- declaration of Node class encapsulation
+//Matthew Dupree & Diego Rico, 16 November 2017
+
+
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 

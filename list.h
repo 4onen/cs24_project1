@@ -1,3 +1,6 @@
+//List.h -- Tree-building and infix parsing algorithm declaration
+//Matthew Dupree & Diego Rico, 16 November 2017
+
 #ifndef LIST_H
 #define LIST_H
 

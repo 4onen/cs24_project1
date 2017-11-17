@@ -1,3 +1,7 @@
+//Node.cpp -- Implementation of node.h
+//Matthew Dupree & Diego Rico, 16 November 2017
+
+
 #include "node.h"
 
 
