@@ -13,14 +13,16 @@ int main(int argc, char* argv[]){
     std::string input = argsToString(argc, argv);
 
     if(input.length()<1){
-        std::cout<<"You entered nothing!"<<std::endl;
+        std::cout<<"No input found!"<<std::endl;
+        std::cout<<"Usage: "<<argv[0]<<" [parenthesized infix expression]"<<std::endl;
+        return 0;
     }else{
         std::cout<<"You entered: "<<input<<std::endl;
     }
 
-    Expression exp = Expression(input);
+    Expression exp(input);
 
-    if(exp.infixString()==""){
+    if(exp.infixString()=="No Tree!"){
         int n = parenCheck(input);
         if(n>0){
             std::cout<<"Missing "<<n<<" ')'s at end of input."<<std::endl;

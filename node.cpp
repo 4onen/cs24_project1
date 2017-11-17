@@ -184,10 +184,10 @@ std::string Node::toString(fixEnum fixing) const{
             return "("+leftString+std::string(1,getOpChar())+rightString+")";
             break;
         case PREFIX:
-            return std::string(1,getOpChar())+" "+leftString+" "+rightString+" ";
+            return std::string(1,getOpChar())+" "+leftString+" "+rightString;
             break;
         case POSTFIX:
-            return leftString+" "+rightString+" "+std::string(1,getOpChar())+" ";
+            return leftString+" "+rightString+" "+std::string(1,getOpChar());
             break;
     }
     return "IMPOSSIBLE_STATE";

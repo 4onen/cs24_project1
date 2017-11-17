@@ -11,17 +11,17 @@ Expression::Expression(const Expression &source){
 std::string Expression::infixString() const{
     if(tree != 0)
         return tree->toInfix();
-    return "";
+    return "No Tree!";
 }
 
 std::string Expression::prefixString() const{
     if(tree != 0)
         return tree->toPrefix();
-    return "";
+    return "No Tree!";
 }
 
 std::string Expression::postfixString() const{
     if(tree != 0)
         return tree->toPostfix();
-    return "";
+    return "No Tree!";
 }

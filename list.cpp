@@ -38,6 +38,7 @@ Node* parenInfixToAST(const std::string pInfix){
                     while(pInfix[cursor]<='9'&&pInfix[cursor]>='0'){
                         cursor++;
                     }
+                    cursor--;
                     break;
                 }
             case '*':
